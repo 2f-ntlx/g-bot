@@ -10,8 +10,16 @@ const bot = new Bot(BOT_TOKEN); // <-- put your authentication token between the
 
 // Handle the /start command.
 bot.command("start", (ctx) => ctx.reply("Welcome! Up and running."));
+// You can force a reply like this:
+bot.command("force", async (ctx) => {
+  await ctx.reply("Hi! I can only read messages that explicitly reply to me!", {
+    // Make Telegram clients automatically show a reply interface to the user.
+    reply_markup: { force_reply: true },
+  });
+});
 // Handle other messages.
 bot.on("message", (ctx) => ctx.reply("Got another message!"));
+
 
 // Now that you specified how to handle messages, you can start your bot.
 // This will connect to the Telegram servers and wait for messages.
